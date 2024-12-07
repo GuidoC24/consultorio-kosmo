@@ -43,14 +43,16 @@ public class IndexController {
     @GetMapping("/")
     public String index(@RequestParam(required = false) Long doctorId,
                         @RequestParam(required = false) Long officeId,
-                        @RequestParam(required = false) LocalDate date, Model model) {
+                        @RequestParam(required = false) LocalDate appointmentDate, Model model) {
         List<Appointment> appointmentList = null;
-        if (doctorId != null && officeId != null && date != null) {
+        if (doctorId != null && officeId != null && appointmentDate != null) {
             Doctor doctor = doctorService.findDoctorById(doctorId).orElseThrow();
             Office office = officeService.findOfficeById(officeId).orElseThrow();
-            LocalDateTime start = date.atStartOfDay();
-            LocalDateTime end = date.plusDays(1).atStartOfDay();
+            LocalDateTime start = appointmentDate.atStartOfDay();
+            LocalDateTime end = appointmentDate.plusDays(1).atStartOfDay();
+            LOGGER.info("Doctor: {}, Office: {}, Start: {}, End {}", doctor, office, start, end);
             appointmentList = appointmentService.findValidAppointments(doctor, office, start, end);
+            LOGGER.info("Appointments: {}", appointmentList);
         }
         model.addAttribute("patients", patientService.getPatients());
         model.addAttribute("doctors", doctorService.getDoctors());
