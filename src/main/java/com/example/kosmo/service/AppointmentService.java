@@ -17,15 +17,15 @@ public class AppointmentService {
     private AppointmentRepository appointmentRepository;
 
     public boolean addAppointment(Appointment appointment) {
-        List<Appointment> appointmentsOffice = appointmentRepository.findByOfficeAndDateBetween(appointment.getOffice(), appointment.getAppointmentDate().minusMinutes(1), appointment.getAppointmentDate().plusMinutes(1));
+        List<Appointment> appointmentsOffice = appointmentRepository.findByOfficeAndAppointmentDateBetween(appointment.getOffice(), appointment.getAppointmentDate().minusMinutes(1), appointment.getAppointmentDate().plusMinutes(1));
         if (!appointmentsOffice.isEmpty()) {
             return false;
         }
-        List<Appointment> appointmentsDoctor = appointmentRepository.findByDoctorAndDateBetween(appointment.getDoctor(), appointment.getAppointmentDate().minusMinutes(1), appointment.getAppointmentDate().plusMinutes(1));
+        List<Appointment> appointmentsDoctor = appointmentRepository.findByDoctorAndAppointmentDateBetween(appointment.getDoctor(), appointment.getAppointmentDate().minusMinutes(1), appointment.getAppointmentDate().plusMinutes(1));
         if (!appointmentsDoctor.isEmpty()) {
             return false;
         }
-        List<Appointment> appointmentsPatient = appointmentRepository.findByDoctorAndDateBetween(appointment.getDoctor(), appointment.getAppointmentDate().minusHours(2), appointment.getAppointmentDate().plusHours(2));
+        List<Appointment> appointmentsPatient = appointmentRepository.findByDoctorAndAppointmentDateBetween(appointment.getDoctor(), appointment.getAppointmentDate().minusHours(2), appointment.getAppointmentDate().plusHours(2));
         for (Appointment a : appointmentsPatient) {
             if (a.getPatient().getName().equals(appointment.getPatient().getName())) {
                 return false;
@@ -33,7 +33,7 @@ public class AppointmentService {
         }
         LocalDateTime startDay = appointment.getAppointmentDate().toLocalDate().atStartOfDay();
         LocalDateTime endDay = startDay.plusDays(1);
-        List<Appointment> appointmentsDay = appointmentRepository.findByDoctorAndDateBetween(appointment.getDoctor(), startDay, endDay);
+        List<Appointment> appointmentsDay = appointmentRepository.findByDoctorAndAppointmentDateBetween(appointment.getDoctor(), startDay, endDay);
         if (appointmentsDay.size() >= 8) {
             return false;
         }
