@@ -18,9 +18,9 @@
     <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name} + ' ' + ${doctor.paternalSurname} + ' ' + ${doctor.maternalSurname}"></option>
   </select><br><br>
 
-  <label for="appointment">Consultorio:</label>
-  <select id="appointment" name="doctor.id">
-    <option th:each="appointment : ${appointments}" th:value="${appointment.id}" th:text="${appointment.name} + ' ' + ${appointment.paternalSurname} + ' ' + ${appointment.maternalSurname}"></option>
+  <label for="office">Consultorio:</label>
+  <select id="office" name="office.id">
+    <option th:each="office : ${offices}" th:value="${office.id}" th:text="${office.officeNumber}"></option>
   </select><br><br>
 
   <label for="appointmentDate">Fecha y Hora:</label>

@@ -9,18 +9,37 @@
 <body>
 <h1>Bienvenido al Consultorio Médico</h1>
 
-<a th:href="@{/patients/add}" class="button">Agregar Pacientes</a>
+<a th:href="@{/patients/add}" class="button">Agregar Pacientes</a><br>
 <a th:href="@{/specialties/add}" class="button">Agregar Especialidades</a><br>
 <a th:href="@{/offices/add}" class="button">Agregar Consultorios</a><br>
-<a th:href="@{/patients/add}" class="button">Agregar Pacientes</a><br>
+<a th:href="@{/doctors/add}" class="button">Agregar Doctores</a><br>
+<a th:href="@{/appointments/add}" class="button">Agregar Citas</a><br><br><br>
+
+<form action="/" method="get">
+    <label for="appointmentDate">Fecha:</label>
+    <input type="date" id="appointmentDate" name="appointmentDate">
+
+    <label for="doctor">Doctor:</label>
+    <select id="doctor" name="doctorId">
+        <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}"></option>
+    </select>
+
+    <label for="office">Consultorio:</label>
+    <select id="office" name="officeId">
+        <option th:each="office : ${offices}" th:value="${office.id}" th:text="${office.officeNumber}"></option>
+    </select>
+
+    <button type="submit">Buscar</button>
+</form>
 
 
-<h2>Citas Agendadas</h2>
+<h2>Citas Encontradas</h2>
 <table border="1">
     <thead>
     <tr>
         <th>Paciente</th>
         <th>Médico</th>
+        <th>Consultorio</th>
         <th>Fecha y Hora</th>
     </tr>
     </thead>
@@ -28,6 +47,29 @@
     <tr th:each="appointment : ${appointments}">
         <td th:text="${appointment.patient.name} + ' ' + ${appointment.patient.paternalSurname}"></td>
         <td th:text="${appointment.doctor.name}"></td>
+        <td th:text="${appointment.office.officeNumber}"></td>
+        <td th:text="${appointment.appointmentDate}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br><br><br>
+
+<h2>Citas Generales</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Paciente</th>
+        <th>Médico</th>
+        <th>Consultorio</th>
+        <th>Fecha y Hora</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${generalAppointments}">
+        <td th:text="${appointment.patient.name} + ' ' + ${appointment.patient.paternalSurname}"></td>
+        <td th:text="${appointment.doctor.name} + ' ' + ${appointment.doctor.paternalSurname}"></td>
+        <td th:text="${appointment.office.officeNumber}"></td>
         <td th:text="${appointment.appointmentDate}"></td>
     </tr>
     </tbody>
