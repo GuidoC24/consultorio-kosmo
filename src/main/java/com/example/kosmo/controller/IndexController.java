@@ -105,7 +105,6 @@ public class IndexController {
     @PostMapping("/addPatient")
     public String addPatient(Patient patient, Model model) {
         if(patientService.addPatient(patient)) {
-            model.addAttribute("successMsg", "Paciente registrado existosamente");
             return "redirect:/";
         } else {
             model.addAttribute("errorMsg", "Error al registrar paciente. Verifique que los datos sean correctos");
@@ -114,9 +113,13 @@ public class IndexController {
     }
 
     @PostMapping("/addAppointment")
-    public String addAppointment(Appointment appointment) {
-        appointmentService.addAppointment(appointment);
-        return "redirect:/";
+    public String addAppointment(Appointment appointment, Model model) {
+        if(appointmentService.addAppointment(appointment)){
+            return "redirect:/";
+        }else{
+            model.addAttribute("errorMsg", "Error al registrar cita. Existe un conflicto con las reglas establecidas");
+            return "resultPage";
+        }
     }
 
     @PostMapping("/addOffice")
