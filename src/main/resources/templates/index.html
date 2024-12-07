@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultorios Médicos</title>
+</head>
+<body>
+<h1>Bienvenido al Consultorio Médico</h1>
+
+<a th:href="@{/patients/add}" class="button">Agregar Pacientes</a>
+<a th:href="@{/specialties/add}" class="button">Agregar Especialidades</a><br>
+<a th:href="@{/offices/add}" class="button">Agregar Consultorios</a><br>
+<a th:href="@{/patients/add}" class="button">Agregar Pacientes</a><br>
+
+
+<h2>Citas Agendadas</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Paciente</th>
+        <th>Médico</th>
+        <th>Fecha y Hora</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.patient.name} + ' ' + ${appointment.patient.paternalSurname}"></td>
+        <td th:text="${appointment.doctor.name}"></td>
+        <td th:text="${appointment.appointmentDate}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

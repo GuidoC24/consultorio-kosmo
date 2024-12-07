@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar cita</title>
+</head>
+<body>
+
+<h2>Agendar Cita</h2>
+<form action="/addAppointment" method="post">
+  <label for="patient">Paciente:</label>
+  <select id="patient" name="patient.id">
+    <option th:each="patient : ${patients}" th:value="${patient.id}" th:text="${patient.name} + ' ' + ${patient.paternalSurname} + ' ' + ${patient.maternalSurname}"></option>
+  </select><br><br>
+
+  <label for="doctor">Médico:</label>
+  <select id="doctor" name="doctor.id">
+    <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name} + ' ' + ${doctor.paternalSurname} + ' ' + ${doctor.maternalSurname}"></option>
+  </select><br><br>
+
+  <label for="appointment">Consultorio:</label>
+  <select id="appointment" name="doctor.id">
+    <option th:each="appointment : ${appointments}" th:value="${appointment.id}" th:text="${appointment.name} + ' ' + ${appointment.paternalSurname} + ' ' + ${appointment.maternalSurname}"></option>
+  </select><br><br>
+
+  <label for="appointmentDate">Fecha y Hora:</label>
+  <input type="datetime-local" id="appointmentDate" name="appointmentDate" required><br><br>
+
+  <input type="submit" value="Agendar">
+</form>
+
+</body>
+</html>

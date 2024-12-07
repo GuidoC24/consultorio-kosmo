@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Doctores</title>
+</head>
+<body>
+
+<h2>Registrar Médico</h2>
+<form action="/addDoctor" method="post">
+    <label for="name">Nombre</label>
+    <input type="text" name="name" required><br><br>
+    <label for="paternalSurname">Apellido paterno:</label>
+    <input type="text" id="paternalSurname" name="paternalSurname" required><br><br>
+    <label for="maternalSurname">Apellido materno:</label>
+    <input type="text" id="maternalSurname" name="maternalSurname" required><br><br>
+    <label for="specialty">Especialidad</label>
+    <select id="specialty" name="specialty.id">
+        <option th:each="specialty : ${specialties}" th:value="${specialty.id}" th:text="${specialty.name}"></option>
+    </select><br><br>
+    <button type="submit">Registrar</button>
+</form>
+
+</body>
+</html>

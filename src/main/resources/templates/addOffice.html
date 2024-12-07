@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar consultorios</title>
+</head>
+<body>
+
+<!-- Formulario de médico -->
+<h2>Registrar Paciente</h2>
+<form action="/addOffice" method="post">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="paternalSurname">Apellido paterno:</label>
+    <input type="text" id="paternalSurname" name="paternalSurname" required><br><br>
+
+    <label for="maternalSurname">Apellido materno:</label>
+    <input type="text" id="maternalSurname" name="maternalSurname" required><br><br>
+
+
+    <label for="dateBirth">Fecha de Nacimiento:</label>
+    <input type="date" id="dateBirth" name="dateBirth" required><br><br>
+
+    <input type="submit" value="Guardar">
+    <div th:if="${successMsg}" style="color: green;">
+        <p th:text="${successMsg}"></p>
+    </div>
+
+    <div th:if="${errorMsg}" style="color: red;">
+        <p th:text="${errorMsg}"></p>
+    </div>
+</form>
+
+</body>
+</html>
